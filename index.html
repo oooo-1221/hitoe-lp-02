@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>hitoé — KADO STUDIO TOKYO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#C0392B;
+  --cream:#F4F3EF;
+  --gray:#E9E7E7;
+  --yellow:#FFFDD0;
+  --graphite:#2B2A28;
+  --ink:rgba(43,42,40,.82);
+  --red-soft:rgba(192,57,43,.12);
+  --line:rgba(43,42,40,.14);
+  --disp:"Fraunces",Georgia,serif;
+  --body:"Zen Kaku Gothic New",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--cream);
+  color:var(--graphite);
+  font-family:var(--body);
+  font-weight:300;
+  line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::selection{background:var(--red);color:var(--cream)}
+/* grain overlay */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.wrap{max-width:1320px;margin:0 auto;padding:0 40px}
+@media(max-width:700px){.wrap{padding:0 22px}}
+/* ---------- HEADER ---------- */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 40px;
+  transition:background .4s,padding .4s;
+}
+header.scrolled{background:var(--cream);box-shadow:0 1px 0 var(--line);padding:14px 40px}
+.logo{font-family:var(--disp);font-style:italic;font-weight:400;font-size:30px;letter-spacing:.5px;color:var(--red);text-decoration:none;line-height:1}
+nav{display:flex;gap:34px;align-items:center}
+nav a{color:var(--graphite);text-decoration:none;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:400;opacity:.8;transition:opacity .2s}
+nav a:hover{opacity:1}
+.nav-cta{
+  border:1px solid var(--red);border-radius:40px;padding:9px 22px;
+  font-size:11px;letter-spacing:.18em;color:var(--red)!important;opacity:1;
+}
+.nav-cta:hover{background:var(--red);color:var(--cream)!important;opacity:1}
+.menu-toggle{display:none}
+@media(max-width:860px){
+  header{padding:16px 22px}
+  nav .nav-link{display:none}
+  nav{gap:14px}
+}
+/* ---------- HERO : arch gallery ---------- */
+.hero{min-height:100vh;background:var(--yellow);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:150px 22px 84px;position:relative}
+.hero-inner{width:100%;max-width:900px;margin:0 auto}
+.hero .eyebrow{
+  font-size:12px;letter-spacing:.32em;text-transform:uppercase;font-weight:400;
+  display:inline-flex;gap:14px;align-items:center;margin-bottom:26px;color:var(--red);
+  opacity:0;animation:fade .9s .2s forwards;
+}
+.hero .eyebrow::before{content:"";width:46px;height:1px;background:var(--red)}
+.hero h1{
+  font-family:var(--disp);font-weight:300;font-style:italic;
+  font-size:clamp(44px,8vw,118px);line-height:.95;letter-spacing:-.01em;
+  color:var(--graphite);position:relative;z-index:2;
+}
+.hero h1 .it{font-style:italic;color:var(--red)}
+.hero h1.l1{margin-bottom:-26px;opacity:0;animation:fade 1s .35s forwards}
+.hero h1.l2{margin-top:-8px;opacity:0;animation:fade 1s .7s forwards}
+.hero .jp{
+  font-family:var(--disp);font-style:italic;font-weight:400;font-size:clamp(16px,2vw,21px);
+  letter-spacing:.04em;color:var(--ink);margin-top:24px;
+  opacity:0;animation:fade 1s .9s forwards;
+}
+.hero .jp .it{font-style:italic;color:var(--red)}
+.hero .arch{width:min(420px,74vw);margin:0 auto;position:relative;z-index:1;opacity:0;transform:translateY(20px);animation:risef 1.1s .5s cubic-bezier(.22,1,.36,1) forwards}
+.hero .arch img{width:100%;aspect-ratio:3/4.1;object-fit:cover;border-radius:50% 50% 6px 6px / 38% 38% 4px 4px;display:block}
+.hero .sub{
+  max-width:42ch;margin:32px auto 0;font-size:16px;line-height:1.9;color:var(--ink);font-weight:300;
+  opacity:0;animation:fade 1s 1s forwards;
+}
+.hero-foot{margin-top:34px;opacity:0;animation:fade 1s 1.15s forwards}
+@media(max-width:600px){.hero h1.l1{margin-bottom:8px}.hero h1.l2{margin-top:8px}}
+.btn{
+  display:inline-flex;align-items:center;gap:14px;
+  background:var(--red);color:var(--cream);text-decoration:none;
+  padding:18px 34px;border-radius:46px;font-size:13px;letter-spacing:.14em;
+  border:1px solid var(--red);transition:.3s;
+}
+.btn:hover{background:transparent;color:var(--red)}
+.btn .arrow{transition:transform .3s}
+.btn:hover .arrow{transform:translateX(5px)}
+/* ---------- SECTION SHELL ---------- */
+section{padding:120px 0}
+.sec-label{font-size:12px;letter-spacing:.3em;text-transform:uppercase;font-weight:400;margin-bottom:30px;display:flex;gap:14px;align-items:center}
+.sec-label::before{content:"";width:34px;height:1px;background:var(--red)}
+.reveal{opacity:0;transform:translateY(34px);transition:opacity 1s cubic-bezier(.22,1,.36,1),transform 1s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:none}
+/* ---------- EMPATHY ---------- */
+.empathy-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(40px,6vw,90px);align-items:center}
+.empathy-text{max-width:none}
+.empathy h2{
+  font-family:var(--disp);font-weight:300;font-size:clamp(28px,4.4vw,52px);line-height:1.32;
+  color:var(--graphite);max-width:18ch;letter-spacing:-.01em;
+}
+.empathy h2 em{font-style:italic}
+.empathy .note{margin-top:34px;max-width:46ch;color:var(--ink);font-size:16px}
+.empathy-img{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--gray)}
+.empathy-img img{width:100%;height:100%;object-fit:cover;object-position:center 35%;display:block;transition:transform 1.2s ease}
+.empathy-img::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(43,42,40,.08)}
+.empathy:hover .empathy-img img{transform:scale(1.04)}
+@media(max-width:860px){.empathy-grid{grid-template-columns:1fr;gap:36px}.empathy-img{aspect-ratio:4/5}.empathy-img img{object-position:center 25%}}
+/* ---------- VALUES ---------- */
+.values{background:var(--gray);color:var(--graphite)}
+.values .sec-label{color:var(--graphite)}
+.values .sec-label::before{background:var(--red)}
+.values-head{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(30px,5vw,64px);line-height:1.05;margin-bottom:80px;color:var(--graphite)}
+.vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}
+.vcard{padding:48px 36px 56px;border-right:1px solid var(--line)}
+.vcard:last-child{border-right:none}
+.vcard .num{font-family:var(--disp);font-style:italic;font-size:15px;color:var(--red);margin-bottom:30px}
+.vcard .ill{width:58px;height:58px;color:var(--red);display:block;margin-bottom:34px}
+.vcard:hover .ill{transform:translateY(-3px)}
+.vcard .ill{transition:transform .5s ease}
+.vcard h3{font-family:var(--disp);font-weight:400;font-size:25px;line-height:1.3;margin-bottom:20px;color:var(--graphite)}
+.vcard h3 em{font-style:italic}
+.vcard p{font-size:14.5px;line-height:1.95;color:rgba(43,42,40,.78);font-weight:300}
+@media(max-width:860px){.vgrid{grid-template-columns:1fr}.vcard{border-right:none;border-bottom:1px solid var(--line)}.vcard .num{margin-bottom:24px}}
+/* ---------- FLOW ---------- */
+.flow .sec-label{margin-bottom:14px}
+.flow-title{font-family:var(--disp);font-weight:300;font-size:clamp(30px,5vw,60px);margin-bottom:70px;letter-spacing:-.01em;color:var(--graphite)}
+.flow-title em{font-style:italic}
+.step{display:grid;grid-template-columns:90px 1fr 1.1fr;gap:40px;align-items:center;padding:34px 0;border-top:1px solid var(--line)}
+.step:last-child{border-bottom:1px solid var(--line)}
+.step .st-num{font-family:var(--disp);font-style:italic;font-size:40px;color:var(--red);opacity:.65}
+.step h4{font-family:var(--disp);font-weight:400;font-size:23px;color:var(--graphite);margin-bottom:6px}
+.step .en{font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.6}
+.step p{font-size:15px;color:var(--ink);font-weight:300}
+@media(max-width:860px){.step{grid-template-columns:54px 1fr;gap:18px}.step p{grid-column:1/-1}.step .st-num{font-size:30px}}
+/* ---------- IMG BLOCK ---------- */
+.imgband{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch}
+.imgband .ph{aspect-ratio:4/5;background:var(--gray);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.imgband .ph::after{content:"PHOTO";position:absolute;font-size:11px;letter-spacing:.3em;color:var(--graphite);opacity:.4}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.ph:has(img)::after{display:none}
+.imgband .txt{padding:0 0 0 70px;display:flex;flex-direction:column;justify-content:center}
+.imgband.flip{direction:rtl}
+.imgband.flip>*{direction:ltr}
+.imgband.flip .txt{padding:0 70px 0 0}
+.imgband h3{font-family:var(--disp);font-weight:300;font-size:clamp(26px,3.6vw,44px);line-height:1.25;margin-bottom:24px;color:var(--graphite)}
+.imgband h3 em{font-style:italic}
+.imgband p{color:var(--ink);font-size:16px;max-width:42ch;margin-bottom:30px}
+@media(max-width:860px){.imgband,.imgband.flip{grid-template-columns:1fr;direction:ltr}.imgband .txt,.imgband.flip .txt{padding:40px 0 0}}
+/* ---------- SHOP ---------- */
+.shop{background:var(--yellow);color:var(--graphite)}
+.shop .sec-label{color:var(--graphite)}.shop .sec-label::before{background:var(--red)}
+.shop h2{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(30px,5vw,62px);line-height:1.05;margin-bottom:18px;color:var(--graphite)}
+.shop h2 em{font-style:italic}
+.shop .lead{max-width:48ch;color:rgba(43,42,40,.82);margin-bottom:60px;font-size:16px}
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.product .pimg{aspect-ratio:1;background:rgba(43,42,40,.05);border:1px solid rgba(43,42,40,.2);display:flex;align-items:center;justify-content:center;margin-bottom:18px;transition:.4s}
+.product:hover .pimg{background:rgba(43,42,40,.09)}
+.product .pimg span{font-size:11px;letter-spacing:.3em;opacity:.5}
+.product h4{font-family:var(--disp);font-weight:400;font-size:20px;color:var(--graphite);display:flex;justify-content:space-between;align-items:baseline}
+.product h4 .pr{font-size:14px;font-style:italic;color:var(--red);opacity:.95}
+.product p{font-size:13px;color:rgba(43,42,40,.7);margin-top:4px}
+.shop-foot{margin-top:54px;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.shop .btn{background:var(--red);color:var(--cream);border-color:var(--red)}
+.shop .btn:hover{background:transparent;color:var(--red)}
+.shop .micro{font-size:12px;letter-spacing:.1em;color:rgba(43,42,40,.7)}
+@media(max-width:860px){.products{grid-template-columns:1fr;gap:34px}}
+/* ---------- ABOUT ---------- */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about .ph{aspect-ratio:3/4;background:var(--gray);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.about .ph::after{content:"PORTRAIT";font-size:11px;letter-spacing:.3em;opacity:.4;color:var(--graphite)}
+.about .ph:has(img)::after{display:none}
+.about h2{font-family:var(--disp);font-weight:300;font-size:clamp(28px,4vw,48px);line-height:1.3;margin-bottom:28px;color:var(--graphite)}
+.about h2 em{font-style:italic}
+.about p{color:var(--ink);font-size:16px;margin-bottom:20px;max-width:46ch}
+.about .sign{font-family:var(--disp);font-style:italic;font-size:20px;color:var(--red);margin-top:30px}
+@media(max-width:860px){.about{grid-template-columns:1fr;gap:40px}}
+/* ---------- PRICE ---------- */
+.price{text-align:center}
+.price .sec-label{justify-content:center}
+.price .card{
+  max-width:560px;margin:0 auto;border:1px solid var(--red);border-radius:6px;padding:64px 50px;position:relative;
+}
+.price .tag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--cream);padding:0 16px;font-family:var(--disp);font-style:italic;font-size:15px;color:var(--red)}
+.price h2{font-family:var(--disp);font-weight:300;font-size:34px;margin-bottom:6px;color:var(--graphite)}
+.price .en{font-size:11px;letter-spacing:.24em;text-transform:uppercase;opacity:.6;margin-bottom:30px}
+.price .pre-amount{font-size:15px;color:var(--ink);font-weight:300;margin-bottom:22px;font-style:italic;letter-spacing:.04em}
+.price .orig{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:8px}
+.price .orig .was{font-size:15px;color:var(--ink);text-decoration:line-through;text-decoration-color:var(--red);opacity:.7;font-family:var(--disp);font-style:italic}
+.price .orig .badge{font-size:11px;letter-spacing:.1em;color:var(--cream);background:var(--red);border-radius:40px;padding:5px 13px}
+.price .amount{font-family:var(--disp);font-style:italic;font-size:72px;line-height:1;margin-bottom:8px;color:var(--red)}
+.price .amount small{font-size:22px;font-style:normal}
+.price .incl{list-style:none;margin:30px auto 38px;max-width:300px;text-align:left}
+.price .incl li{padding:11px 0;border-bottom:1px solid var(--line);font-size:14.5px;color:var(--ink);display:flex;justify-content:space-between}
+.price .incl li span{color:var(--red);font-family:var(--disp);font-style:italic}
+/* ---------- FAQ ---------- */
+.faq-title{font-family:var(--disp);font-weight:300;font-size:clamp(28px,4.4vw,52px);margin-bottom:50px;color:var(--graphite)}
+.faq-title em{font-style:italic}
+.faq-item{border-top:1px solid var(--line);padding:0}
+.faq-item:last-child{border-bottom:1px solid var(--line)}
+.faq-q{padding:26px 0;font-size:18px;font-family:var(--disp);font-weight:400;color:var(--graphite);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.faq-q .pl{font-size:22px;transition:transform .3s;flex-shrink:0;color:var(--red)}
+.faq-item.open .pl{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.faq-a p{padding:0 0 26px;color:var(--ink);font-size:15px;max-width:62ch}
+/* ---------- CTA / FOOTER ---------- */
+.final{background:var(--red);color:var(--cream);text-align:center;padding:130px 0}
+.final ::selection{background:var(--cream);color:var(--red)}
+.final .big{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(27px,5.3vw,73px);line-height:1.1;margin-bottom:16px;color:var(--cream)}
+.final .big em{font-style:italic}
+.final p{color:rgba(244,243,239,.85);max-width:40ch;margin:0 auto 44px;font-size:16px}
+.final .btn{background:var(--cream);color:var(--red);border-color:var(--cream)}
+.final .btn:hover{background:transparent;color:var(--cream)}
+footer{background:var(--graphite);color:var(--cream);padding:70px 0 50px;border-top:1px solid rgba(244,243,239,.2)}
+.foot-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:40px}
+.foot-logo{font-family:var(--disp);font-style:italic;font-size:46px;line-height:1}
+.foot-sub{font-size:11px;letter-spacing:.3em;text-transform:uppercase;margin-top:8px;opacity:.8}
+.foot-col h5{font-size:11px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px;opacity:.7;font-weight:400}
+.foot-col a,.foot-col p{display:block;color:var(--cream);text-decoration:none;font-size:14px;opacity:.9;margin-bottom:9px;line-height:1.6}
+.foot-col a:hover{opacity:.6}
+.foot-base{margin-top:60px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:11px;letter-spacing:.12em;opacity:.7}
+@keyframes rise{to{transform:translateY(0)}}
+@keyframes risef{to{opacity:1;transform:none}}
+@keyframes fade{to{opacity:1}}
+@keyframes scroll{to{transform:translateX(-50%)}}
+</style>
+</head>
+<body>
+<header id="hdr">
+  <a href="#top" class="logo">hitoé</a>
+  <nav>
+    <a href="#flow" class="nav-link">Experience</a>
+    <a href="#shop" class="nav-link">Objects</a>
+    <a href="#about" class="nav-link">Studio</a>
+    <a href="#book" class="nav-cta">Book a seat</a>
+  </nav>
+</header>
+<!-- HERO : arch gallery -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="eyebrow">Ikebana experience · Tokyo</div>
+    <h1 class="l1">自分に戻る、</h1>
+    <div class="arch"><img src="images/R0001285.JPG" alt=""></div>
+    <h1 class="l2">静かなひととき。</h1>
+    <p class="jp">A quiet hour to return to <span class="it">yourself</span>.</p>
+    <p class="sub">一期一会の花材を、自分の手で。生けた花は器ごと持ち帰り、明日からのお部屋で再現できる。</p>
+    <div class="hero-foot">
+      <a href="#book" class="btn">体験を予約する <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+<!-- EMPATHY -->
+<section class="empathy wrap reveal">
+  <div class="empathy-grid">
+    <div class="empathy-text">
+      <div class="sec-label">For you</div>
+      <h2>花を飾りたい。<br>でも、なんとなく<em>うまく生けられない</em>。</h2>
+      <p class="note">美しいものを身近に置きたいのに、日々の忙しさで後回しになる。
+      hitoéは、そんなあなたが手ぶらで訪れ、二時間だけ花と静かに向き合い、「自分に戻る」ための場所です。敷居の高い伝統ではなく、今の私にちょうどいい等身大の贅沢を。</p>
+    </div>
+    <div class="empathy-img"><img src="images/R0001404.JPG" alt="花と静かに向き合う時間"></div>
+  </div>
+</section>
+<!-- VALUES -->
+<section class="values" id="value">
+  <div class="wrap reveal">
+    <div class="sec-label">What you take home</div>
+    <div class="values-head">Not consumption.<br>A small investment<br>in yourself.</div>
+    <div class="vgrid">
+      <div class="vcard">
+        <div class="num">01</div>
+        <svg class="ill" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="17" cy="46" r="6"/>
+          <circle cx="35" cy="46" r="6"/>
+          <path d="M20.5 42 L51 14"/>
+          <path d="M31.5 42 L18 23"/>
+          <circle cx="27" cy="31.5" r="1.3" fill="currentColor" stroke="none"/>
+        </svg>
+        <h3>手軽でカジュアル<br>でも、本格的な華道を</h3>
+        <p>花屋に行き、器を選び、生け方を調べる——そのハードルを越えて、手ぶらで二時間。季節のエッセンスだけを、美しく摂取できる。</p>
+      </div>
+      <div class="vcard">
+        <div class="num">02</div>
+        <svg class="ill" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M23 41 C21 51 26 56 32 56 C38 56 43 51 41 41"/>
+          <path d="M22 41 H42"/>
+          <path d="M32 41 V18"/>
+          <path d="M32 28 L40 20"/>
+          <circle cx="31.5" cy="15" r="3.6"/>
+          <circle cx="41" cy="17.5" r="2.4"/>
+        </svg>
+        <h3>家まで続く、<br>再現できる体験</h3>
+        <p>「あぁ楽しかった」で終わらない。生けた花は器ごと持ち帰り、明日からのお部屋で再現できる。「私にもできた」という静かな自己効力感を。</p>
+      </div>
+      <div class="vcard">
+        <div class="num">03</div>
+        <svg class="ill" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M11 32 Q32 17 53 32 Q32 47 11 32 Z"/>
+          <circle cx="32" cy="32" r="6"/>
+          <circle cx="32" cy="32" r="1.5" fill="currentColor" stroke="none"/>
+        </svg>
+        <h3>空間を、<br><em>見る目</em>が育つ。</h3>
+        <p>花を観察し、余白を決め、器との均衡を探す。このプロセスで養われる「引き算の目」は、お部屋の整え方から、くらしの見え方が変わります。使い捨てにならない、感性のOS。</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- FLOW -->
+<section class="flow wrap reveal" id="flow">
+  <div class="sec-label">The experience</div>
+  <div class="flow-title">A <em>two-hour</em> ritual.</div>
+  <div class="step">
+    <div class="st-num">01</div>
+    <div><h4>迎えられる</h4><div class="en">Arrive empty-handed</div></div>
+    <p>手ぶらでどうぞ。庭を望む席で、まず季節のペアリングドリンク（アルコール・ノンアルから選べます）と共に呼吸を整えます。</p>
+  </div>
+  <div class="step">
+    <div class="st-num">02</div>
+    <div><h4>花を選ぶ</h4><div class="en">Choose the season</div></div>
+    <p>その日だけの一期一会の花材から、心が動いたものを。逃せば二度はない、今この瞬間の季節を。</p>
+  </div>
+  <div class="step">
+    <div class="st-num">03</div>
+    <div><h4>生ける</h4><div class="en">Find the balance</div></div>
+    <p>ハサミを入れ、器との均衡を探す。花を生けるプロセスに、今の自分の心がそっと映ります。</p>
+  </div>
+  <div class="step">
+    <div class="st-num">04</div>
+    <div><h4>持ち帰る</h4><div class="en">Bring it to your life</div></div>
+    <p>生けた花を器ごと。家での置き場所を思い描きながら帰る——ここでの美しい体験を、明日からの暮らしへ繋いでいく。</p>
+  </div>
+</section>
+<!-- IMAGE BAND 1 -->
+<section class="wrap reveal">
+  <div class="imgband">
+    <div class="ph"><img src="images/R0001219.JPG" alt=""></div>
+    <div class="txt">
+      <h3>静けさの中に、<br><em>くらしがある。</em></h3>
+      <p>心地よい自然と、人の手入れが融合した庭を眺めながら。静かだけれど落ち着く、日常と非日常が溶け合う時間。一人でいることを、選べる場所。</p>
+    </div>
+  </div>
+</section>
+<!-- SHOP -->
+<section class="shop" id="shop">
+  <div class="wrap reveal">
+    <div class="sec-label">Objects</div>
+    <h2>一生ものの道具を、<br><em>今日ここで選ぶ。</em></h2>
+    <p class="lead">体験の中で手に馴染んだハサミや器を、そのまま持ち帰ることができます。その日の感覚が新鮮なうちに選ぶ一挺は、何年も手元に残り続けます。オンラインストアでもお求めいただけます。</p>
+    <div class="products">
+      <div class="product">
+        <div class="pimg"><span>PHOTO</span></div>
+        <h4>花鋏 <span class="pr">from ¥6,800</span></h4>
+        <p>手に馴染む、一生ものの一挺。</p>
+      </div>
+      <div class="product">
+        <div class="pimg"><span>PHOTO</span></div>
+        <h4>花器 <span class="pr">from ¥4,500</span></h4>
+        <p>作家ものの一点。器ごと持ち帰る初回プランにも。</p>
+      </div>
+      <div class="product">
+        <div class="pimg"><span>PHOTO</span></div>
+        <h4>水盤・剣山 <span class="pr">from ¥3,200</span></h4>
+        <p>家での再現を支える、最初の道具。</p>
+      </div>
+    </div>
+    <div class="shop-foot">
+      <a href="#" class="btn">オンラインストアへ <span class="arrow">→</span></a>
+      <span class="micro">店頭購入可 / 体験当日にそのままお持ち帰りいただけます</span>
+    </div>
+  </div>
+</section>
+<!-- IMAGE BAND 2 -->
+<section class="wrap reveal">
+  <div class="imgband flip">
+    <div class="ph"><img src="images/R0001324.JPG" alt=""></div>
+    <div class="txt">
+      <h3>和の精神と、<br><em>現代の交差点。</em></h3>
+      <p>朝の暗さとやわらかい日差し、月明かりと夜。光と暗さの移ろいを感じる空間で、敷居の高い伝統文化を、カジュアルに、今の私にちょうどいい贅沢として。</p>
+    </div>
+  </div>
+</section>
+<!-- ABOUT -->
+<section class="about wrap reveal" id="about">
+  <div class="ph"><img src="images/R0001330.JPG" alt=""></div>
+  <div>
+    <div class="sec-label">The studio</div>
+    <h2>見せるための美ではなく、<br><em>感じるための美を。</em></h2>
+    <p>美しさは、体験する人の内側に向かうもの、これがhitoé / KADO STUDIOの思想です。サロンで学んだ知識が暮らしに還元され、明日をよりよく生きる力になることだけを大切にしています。</p>
+    <p>花材も、器も、講師も、空間も。商業的な規模や知名度ではなく、美意識と誠実さを共有できるかどうかで選んでいます。</p>
+    <div class="sign">— hitoé, Tokyo</div>
+  </div>
+</section>
+<!-- PRICE -->
+<section class="price wrap reveal" id="book">
+  <div class="sec-label">Book a seat</div>
+  <div class="card">
+    <div class="tag">First visit</div>
+    <h2>初回体験</h2>
+    <div class="en">Introductory session</div>
+    <p class="pre-amount">この二時間は、あなたの中に残ります。</p>
+    <div class="orig"><span class="was">通常 ¥9,000</span><span class="badge">オープン記念 ¥2,000 OFF</span></div>
+    <div class="amount"><small>¥</small>7,000</div>
+    <ul class="incl">
+      <li>所要時間 <span>約2時間</span></li>
+      <li>季節の花材・花器 <span>込み</span></li>
+      <li>季節のペアリングドリンク <span>2杯</span></li>
+      <li>ドリンクの種類 <span>アルコール・ノンアル選択可</span></li>
+      <li>生けた花の持ち帰り <span>器ごと</span></li>
+      <li>いけばなの基礎視点 <span>生け方カード付き</span></li>
+      <li>形態 <span>対面・少人数・東京</span></li>
+    </ul>
+    <a href="#" class="btn">予約に進む <span class="arrow">→</span></a>
+  </div>
+</section>
+<!-- FAQ -->
+<section class="faq wrap reveal">
+  <div class="sec-label">Questions</div>
+  <div class="faq-title">Before you <em>arrive</em>.</div>
+  <div class="faq-item">
+    <div class="faq-q">花を生けるのは初めてでも大丈夫ですか？ <span class="pl">+</span></div>
+    <div class="faq-a"><p>もちろんです。むしろ初めての方のための体験です。「うまく生けられない」という感覚をほどくところから始めます。手ぶらでお越しください。</p></div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">持ち物は必要ですか？ <span class="pl">+</span></div>
+    <div class="faq-a"><p>不要です。花材・花器・道具・ドリンクはすべて含まれています。生けた花は器ごとお持ち帰りいただくので、帰り道だけご配慮ください。</p></div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">服装の指定はありますか？ <span class="pl">+</span></div>
+    <div class="faq-a"><p>敷居の高さは全くありません。ご自身が心地よい、普段通りの服装でお越しください。</p></div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">道具はその場で買えますか？ <span class="pl">+</span></div>
+    <div class="faq-a"><p>はい。体験で使った花鋏や花器を、当日そのままお持ち帰りいただけます。オンラインストアでも後日お求めいただけます。</p></div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">所要時間と場所を教えてください。 <span class="pl">+</span></div>
+    <div class="faq-a"><p>約2時間、東京のスタジオでの対面開催です。少人数制のため、静かに花と向き合っていただけます。詳しい所在地はご予約後にご案内します。</p></div>
+  </div>
+</section>
+<!-- FINAL CTA -->
+<section class="final">
+  <div class="wrap">
+    <div class="big">花を見つめ、自分と向き合う。<br>心を満たす<em>ひととき</em>を。</div>
+    <p>今しか咲かない季節の花を、自分の手で活ける時間。</p>
+    <a href="#" class="btn">体験を予約する <span class="arrow">→</span></a>
+  </div>
+</section>
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">hitoé</div>
+        <div class="foot-sub">KADO STUDIO &nbsp;·&nbsp; TOKYO</div>
+      </div>
+      <div class="foot-col">
+        <h5>Menu</h5>
+        <a href="#flow">Experience</a>
+        <a href="#shop">Objects</a>
+        <a href="#about">Studio</a>
+        <a href="#book">Book a seat</a>
+      </div>
+      <div class="foot-col">
+        <h5>Contact</h5>
+        <p>Tokyo, Japan</p>
+        <a href="#">Instagram</a>
+        <a href="#">Online Store</a>
+        <a href="#">Mail</a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 hitoé / KADO STUDIO</span>
+      <span>静けさの中に、くらしがある。</span>
+    </div>
+  </div>
+</footer>
+<script>
+const hdr=document.getElementById('hdr');
+addEventListener('scroll',()=>{hdr.classList.toggle('scrolled',scrollY>40)});
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const it=q.parentElement,a=q.nextElementSibling,open=it.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-a').style.maxHeight=null});
+    if(!open){it.classList.add('open');a.style.maxHeight=a.scrollHeight+'px'}
+  });
+});
+</script>
+</body>
+</html>
